@@ -26,18 +26,18 @@ class BowlingGame {
         // miss
         currentFrame.rolls.add(numberOfPins)
         currentFrame.score = currentFrame.score + numberOfPins
+        val previousScore = currentFrame.score
+        frameIndex += 1
+        currentFrame = frames[frameIndex]
+        currentFrame.score = previousScore
       }
     }
   }
 
   private fun notAnOpenFrame(numberOfPins: Int) = currentFrame.rolls.first() + numberOfPins == 10
-
   private fun firstThrow() = currentFrame.rolls.isEmpty()
-
   private fun isSpare(numberOfPins: Int) = numberOfPins < 10
-
   private fun isStrike(numberOfPins: Int) = numberOfPins == 10
-
   fun score(): Int = currentFrame.score
 }
 

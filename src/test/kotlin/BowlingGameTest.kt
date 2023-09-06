@@ -40,4 +40,19 @@ class BowlingGameTest {
 
     assertEquals(10, game.score())
   }
+
+  @Test
+  fun testWith2Frames() {
+    val game = BowlingGame()
+
+    game.roll(1)
+    game.roll(4)
+    game.roll(4)
+    game.roll(5)
+    game.roll(6)
+    game.roll(4)
+
+    assertEquals(29, game.score())
+
+  }
 }
