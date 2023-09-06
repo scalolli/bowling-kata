@@ -4,6 +4,15 @@ import org.junit.jupiter.api.Test
 class BowlingGameTest {
 
   @Test
+  fun testGetScoreWhenSpareWithFirstThrow() {
+    val game = BowlingGame()
+
+    game.roll(5)
+
+    assertEquals(5, game.score())
+  }
+
+  @Test
   fun testGetScoreWhenItsASpare() {
     val game = BowlingGame()
 
@@ -21,5 +30,14 @@ class BowlingGameTest {
     game.roll(4)
 
     assertEquals(9, game.score())
+  }
+
+  @Test
+  fun testGetScoreForAStrike() {
+    val game = BowlingGame()
+
+    game.roll(10)
+
+    assertEquals(10, game.score())
   }
 }
