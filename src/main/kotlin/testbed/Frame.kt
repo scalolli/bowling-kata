@@ -35,7 +35,7 @@ private fun calculateBonus(currentFrame: LookAheadFrame, frames: List<Frame>): I
                     is Spare -> f.firstThrow
                     is Strike -> 10
                     is Miss -> f.firstThrow
-                    is LastFrame -> TODO()
+                    is LastFrame -> f.firstThrow
                 }
             }
 
