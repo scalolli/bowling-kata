@@ -6,7 +6,7 @@ class BowlingScoreTest {
 
     @Test
     fun testScoreForSpareAndMiss() {
-        val frames = listOf(Spare(4, 6), Miss(1, 8))
+        val frames = listOf(Spare(4), Miss(1, 8))
         val scores = mapOf(0 to 11, 1 to 20)
 
         val frameNumberToScore = calculateScores(frames)
@@ -36,7 +36,7 @@ class BowlingScoreTest {
 
     @Test
     fun testScoreForMissSpareAndLastFrame() {
-        val frames = listOf(Miss(1, 4), Spare(6, 4), LastFrame(6, 4, 10))
+        val frames = listOf(Miss(1, 4), Spare(6), LastFrame(6, 4, 10))
         val scores = mapOf(0 to 5, 1 to 21, 2 to 41)
 
         val frameNumberToScore = calculateScores(frames)
@@ -49,12 +49,12 @@ class BowlingScoreTest {
         val frames = listOf(
             Miss(1, 4),
             Miss(4, 5),
-            Spare(6, 4),
-            Spare(5, 5),
+            Spare(6),
+            Spare(5),
             Strike,
             Miss(0, 1),
-            Spare(7, 3),
-            Spare(6, 4),
+            Spare(7),
+            Spare(6),
             Strike,
             LastFrame(2, 8, 6)
         )

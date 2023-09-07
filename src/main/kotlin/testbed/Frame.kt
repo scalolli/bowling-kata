@@ -3,7 +3,10 @@ package testbed
 sealed class Frame
 sealed class LookAheadFrame : Frame()
 object Strike : LookAheadFrame()
-data class Spare(val firstThrow: Int, val secondThrow: Int) : LookAheadFrame()
+data class Spare(val firstThrow: Int) : LookAheadFrame() {
+    val secondThrow = 10 - firstThrow
+}
+
 data class FirstThrow(val numberOfPins: Int) : Frame()
 data class Miss(val firstThrow: Int, val secondThrow: Int) : Frame()
 data class LastFrame(val firstThrow: Int, val secondThrow: Int, val thirdThrow: Int) : Frame()
