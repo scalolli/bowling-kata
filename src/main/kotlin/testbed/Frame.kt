@@ -9,7 +9,7 @@ data class Miss(val firstThrow: Int, val secondThrow: Int) : Frame()
 data class LastFrame(val firstThrow: Int, val secondThrow: Int, val thirdThrow: Int) : Frame()
 
 fun calculateScores(frames: List<Frame>): Map<Int, Int> {
-    var scores = mutableMapOf<Int, Int>()
+    val scores = mutableMapOf<Int, Int>()
 
     frames.mapIndexed { index, frame ->
         val tuple = when (frame) {

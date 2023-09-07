@@ -43,4 +43,25 @@ class BowlingScoreTest {
 
         assertEquals(scores, frameNumberToScore)
     }
+
+    @Test
+    fun testFullGameScore() {
+        val frames = listOf(
+            Miss(1, 4),
+            Miss(4, 5),
+            Spare(6, 4),
+            Spare(5, 5),
+            Strike,
+            Miss(0, 1),
+            Spare(7, 3),
+            Spare(6, 4),
+            Strike,
+            LastFrame(2, 8, 6)
+        )
+        val scores = listOf(5, 14, 29, 49, 60, 61, 77, 97, 117, 133).mapIndexed { index, value -> index to value }.toMap()
+
+        val frameNumberToScore = calculateScores(frames)
+
+        assertEquals(scores, frameNumberToScore)
+    }
 }
