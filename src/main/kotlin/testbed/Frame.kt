@@ -15,7 +15,7 @@ fun calculateScores(frames: List<Frame>): Map<Int, Int> {
             is FirstThrow -> TODO()
             is Miss -> index to frame.firstThrow + frame.secondThrow
             is Spare -> index to (10 + calculateBonus(frame, frames.subList(index + 1, frames.size)))
-            is Strike -> TODO()
+            is Strike -> index to (10 + calculateBonus(frame, frames.subList(index + 1, frames.size)))
         }
         scores[tuple.first] = tuple.second + scores.getOrDefault(index - 1, 0)
         tuple
@@ -27,15 +27,26 @@ fun calculateScores(frames: List<Frame>): Map<Int, Int> {
 private fun calculateBonus(currentFrame: LookAheadFrame, frames: List<Frame>): Int {
     return if (frames.isNotEmpty()) {
         when (currentFrame) {
-            is Spare ->
-                when (frames.first()) {
-                    is FirstThrow -> (frames.first() as FirstThrow).numberOfPins
-                    is Spare -> (frames.first() as Spare).firstThrow
+            is Spare -> {
+                when (val f = frames.first()) {
+                    is FirstThrow -> f.numberOfPins
+                    is Spare -> f.firstThrow
                     is Strike -> 10
-                    is Miss -> (frames.first() as Miss).firstThrow
+                    is Miss -> f.firstThrow
                 }
+            }
 
-            Strike -> TODO()
+            Strike -> {
+                when (val f = frames.first()) {
+                    is FirstThrow -> f.numberOfPins
+                    is Spare -> f.firstThrow + f.secondThrow
+                    is Strike -> {
+                        val currentIndex = frames.indexOf(f)
+                        10 + calculateBonus(f, frames.subList(currentIndex + 1, frames.size))
+                    }
+                    is Miss -> f.firstThrow + f.secondThrow
+                }
+            }
         }
     } else 0
 }
