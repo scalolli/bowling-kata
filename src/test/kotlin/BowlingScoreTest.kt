@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test
-import testbed.Miss
-import testbed.Spare
-import testbed.Strike
-import testbed.calculateScores
+import testbed.*
 import kotlin.test.assertEquals
 
 class BowlingScoreTest {
@@ -21,6 +18,16 @@ class BowlingScoreTest {
     fun testScoreForStrikeAndMiss() {
         val frames = listOf(Strike, Miss(1, 8))
         val scores = mapOf(0 to 19, 1 to 28)
+
+        val frameNumberToScore = calculateScores(frames)
+
+        assertEquals(scores, frameNumberToScore)
+    }
+
+    @Test
+    fun testScoreForMissMissSpare() {
+        val frames = listOf(Miss(1, 4), Strike, LastFrame(6, 4, 10))
+        val scores = mapOf(0 to 5, 1 to 25, 2 to 45)
 
         val frameNumberToScore = calculateScores(frames)
 
