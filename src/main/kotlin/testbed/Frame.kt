@@ -1,9 +1,9 @@
 package testbed
 
 sealed class Frame
-sealed class LookAheadFrame : Frame()
-object Strike : LookAheadFrame()
-data class Spare(val firstThrow: Int) : LookAheadFrame() {
+sealed class BonusFrame : Frame()
+object Strike : BonusFrame()
+data class Spare(val firstThrow: Int) : BonusFrame() {
     val secondThrow = 10 - firstThrow
 }
 
@@ -29,7 +29,7 @@ fun calculateScores(frames: List<Frame>): Map<Int, Int> {
     return scores
 }
 
-private fun calculateBonus(currentFrame: LookAheadFrame, frames: List<Frame>): Int {
+private fun calculateBonus(currentFrame: BonusFrame, frames: List<Frame>): Int {
     return if (frames.isNotEmpty()) {
         when (currentFrame) {
             is Spare -> {
